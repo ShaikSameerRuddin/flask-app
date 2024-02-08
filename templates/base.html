@@ -1,0 +1,57 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Add your CSS styles here -->
+    <style>
+      /* Add your CSS styles for the header here */
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav {
+        background-color: #444;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+      }
+      nav a:hover {
+        background-color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to My Website!</h1>
+    </header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <!-- Define a block for content -->
+    <div class="content">{% block content %}{% endblock %}</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".nav-link").click(function (event) {
+          event.preventDefault();
+          var page = $(this).data("page");
+          $.get("/" + page, function (data) {
+            $("#content").html(data);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
